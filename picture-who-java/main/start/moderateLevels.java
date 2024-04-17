@@ -11,18 +11,17 @@ import javax.swing.text.DocumentFilter;
 import java.awt.*;
 import java.awt.event.*;
 
-public class easyLevels implements ActionListener {
+public class moderateLevels implements ActionListener {
 
     // Text fields for user input
-    private JTextField answerField1, answerField2, answerField3, answerField4;
-    // Current level tracker
-    private int currentLevel = 1;
+    private JTextField answerField1, answerField2, answerField3, answerField4, answerField5;
+    private int currentLevel = 11;
     // Label to display remaining time 
     private JLabel timerLabel;
 // Timer for the game countdown and managing time-related events
     private Timer timer;
     // Seconds left for each level
-    private int secondsLeft = 20; 
+    private int secondsLeft = 25; 
 
 
 // Hint system variables and methods for providing hints to players
@@ -33,14 +32,14 @@ public class easyLevels implements ActionListener {
     
     // Array of hint messages
     private String[] hintMessages = {
-        "D",
-        "O" };
+        "O",
+        "C" };
 
      // Index for cycling through hint messages
     private int hintMessageIndex = 0;
 
     // Constructor to initialize game 
-    public easyLevels() {
+    public moderateLevels() {
         openGameWindow(); // Initialize the game window 
     }
 
@@ -73,7 +72,7 @@ public class easyLevels implements ActionListener {
         
         // load and display image 
         //the setup PictureWho-main\\img\\
-        ImageIcon imageIcon1 = new ImageIcon("main\\img\\1.png");
+        ImageIcon imageIcon1 = new ImageIcon("main\\img\\11.png");
         Image image1 = imageIcon1.getImage().getScaledInstance(500,  550, Image.SCALE_SMOOTH);
         ImageIcon scaledImageIcon1 = new ImageIcon(image1);
         JLabel imageLabel1 = new JLabel(scaledImageIcon1);
@@ -83,18 +82,20 @@ public class easyLevels implements ActionListener {
         answerField1 = createSingleLetterTextField(gameFrame, answerField2);
         answerField2 = createSingleLetterTextField(gameFrame, answerField3);
         answerField3 = createSingleLetterTextField(gameFrame, answerField4);
-        answerField4 = createSingleLetterTextField(gameFrame, null);
+        answerField4 = createSingleLetterTextField(gameFrame, answerField5);
+        answerField5 = createSingleLetterTextField(gameFrame, null);
         
         // Panel to hold answer text fields 
         JPanel answerPanel = new JPanel(new GridLayout(1, 4, 20, 20));
         answerPanel.setBackground(new Color(94, 69, 128));
-        answerPanel.setBorder(BorderFactory.createEmptyBorder(20, 480, 10, 480));
+        answerPanel.setBorder(BorderFactory.createEmptyBorder(20, 380, 10, 380));
         mainPanel.add(answerPanel, BorderLayout.SOUTH);
         
         answerPanel.add(answerField1);
         answerPanel.add(answerField2);
         answerPanel.add(answerField3);
         answerPanel.add(answerField4);
+        answerPanel.add(answerField5);
         
         // Label to display remaining time 
         Border timeBorder = BorderFactory.createEmptyBorder(0, 430, 0, 100); 
@@ -200,18 +201,21 @@ public class easyLevels implements ActionListener {
         String enteredAnswer2 = answerField2.getText().trim().toLowerCase();
         String enteredAnswer3 = answerField3.getText().trim().toLowerCase();
         String enteredAnswer4 = answerField4.getText().trim().toLowerCase();
+        String enteredAnswer5 = answerField5.getText().trim().toLowerCase();
     
-        String correctAnswer1 = "d";
-        String correctAnswer2 = "o";
-        String correctAnswer3 = "g";
-        String correctAnswer4 = "s";
+        String correctAnswer1 = "o";
+        String correctAnswer2 = "c";
+        String correctAnswer3 = "e";
+        String correctAnswer4 = "a";
+        String correctAnswer5 = "n";
     
         if (enteredAnswer1.equals(correctAnswer1) &&
                 enteredAnswer2.equals(correctAnswer2) &&
                 enteredAnswer3.equals(correctAnswer3) &&
-                enteredAnswer4.equals(correctAnswer4)) {
+                enteredAnswer4.equals(correctAnswer4) &&
+                enteredAnswer5.equals(correctAnswer5)) {
             timer.stop();
-            String message = ("<html><div style='text-align: center; margin-left: 60px; margin-right: 60px;'><span style='font-family: Paytone One; font-size: 20px; color: #443C3C;'>DOGS!</span><br><span style='font-size: 27px; color: #5E4580;'>Brilliant</span></div></html>");
+            String message = ("<html><div style='text-align: center; margin-left: 60px; margin-right: 60px;'><span style='font-family: Paytone One; font-size: 20px; color: #443C3C;'>OCEAN!</span><br><span style='font-size: 27px; color: #5E4580;'>Brilliant</span></div></html>");
 
             // Create a custom option pane
             JOptionPane optionPane = new JOptionPane(message, JOptionPane.PLAIN_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
@@ -235,18 +239,19 @@ public class easyLevels implements ActionListener {
         answerField2.setText("");
         answerField3.setText("");
         answerField4.setText("");
+        answerField5.setText("");
         answerField1.requestFocusInWindow();
     }
     
     // Method to open the next level of the game
     private void openNextLevel() {
         currentLevel++;
-        new easyLevels2();
+        new moderateLevels2();
     }
 
     // Method to restart the current level of the game
     private void restartLevel() {
-        new easyLevels();
+        new moderateLevels();
     }
 
     @Override
@@ -257,7 +262,7 @@ public class easyLevels implements ActionListener {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                new easyLevels();
+                new moderateLevels();
             }
         });
     }

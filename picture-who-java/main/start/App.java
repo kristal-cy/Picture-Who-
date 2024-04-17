@@ -116,6 +116,7 @@ public class App extends JFrame {
                 }
             }
         });
+        
         // adding the exitbutton to our collective panel for buttons
         buttonPanel.add(exitButton);
         // the borderlayout position
@@ -183,7 +184,7 @@ public class App extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(difficultyFrame, "Moderate difficulty selected");
                 difficultyFrame.dispose();
-                new moderatelevel1();
+                new moderateLevels();
             }
         });
 
@@ -191,7 +192,7 @@ public class App extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(difficultyFrame, "Hard difficulty selected");
                 difficultyFrame.dispose();
-                new hardlevel1();
+                new hardLevels();
             }
         });
 

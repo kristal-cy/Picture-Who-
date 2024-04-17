@@ -11,12 +11,12 @@ import javax.swing.text.DocumentFilter;
 import java.awt.*;
 import java.awt.event.*;
 
-public class easyLevels2 implements ActionListener {
-    private JTextField answerField1, answerField2, answerField3;
-    private int currentLevel = 2;
+public class hardLevels9 implements ActionListener {
+    private JTextField answerField1, answerField2, answerField3, answerField4;
+    private int currentLevel = 29;
     private JLabel timerLabel;
     private Timer timer; 
-    private int secondsLeft = 20;
+    private int secondsLeft = 30;
 
     private JLabel hintImageLabel; 
     private int hintClickCount = 0;
@@ -28,7 +28,7 @@ public class easyLevels2 implements ActionListener {
 
     private int hintMessageIndex = 0;
     
-    public easyLevels2() {
+    public hardLevels9() {
         openGameWindow();
     }
 
@@ -57,7 +57,7 @@ public class easyLevels2 implements ActionListener {
         mainPanel.setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 20));
         mainPanel.add(imagePanel, BorderLayout.CENTER);
 
-        ImageIcon imageIcon1 = new ImageIcon("main\\img\\2.png");
+        ImageIcon imageIcon1 = new ImageIcon("main\\img\\29.png");
         Image image1 = imageIcon1.getImage().getScaledInstance(500,  550, Image.SCALE_SMOOTH);
         ImageIcon scaledImageIcon1 = new ImageIcon(image1);
         JLabel imageLabel1 = new JLabel(scaledImageIcon1);
@@ -65,7 +65,8 @@ public class easyLevels2 implements ActionListener {
 
         answerField1 = createSingleLetterTextField(gameFrame, answerField2);
         answerField2 = createSingleLetterTextField(gameFrame, answerField3);
-        answerField3 = createSingleLetterTextField(gameFrame, null);
+        answerField3 = createSingleLetterTextField(gameFrame, answerField4);
+        answerField4 = createSingleLetterTextField(gameFrame, null);
 
         JPanel answerPanel = new JPanel(new GridLayout(1, 4, 20, 20));
         answerPanel.setBackground(new Color(94, 69, 128));
@@ -75,6 +76,7 @@ public class easyLevels2 implements ActionListener {
         answerPanel.add(answerField1);
         answerPanel.add(answerField2);
         answerPanel.add(answerField3);
+        answerPanel.add(answerField4);
 
         Border timeBorder = BorderFactory.createEmptyBorder(0, 430, 0, 100); 
         timerLabel = new JLabel("Time Left: " + secondsLeft);
@@ -173,18 +175,21 @@ private void checkAnswers(JFrame gameFrame) {
     String enteredAnswer1 = answerField1.getText().trim().toLowerCase();
     String enteredAnswer2 = answerField2.getText().trim().toLowerCase();
     String enteredAnswer3 = answerField3.getText().trim().toLowerCase();
+    String enteredAnswer4 = answerField4.getText().trim().toLowerCase();
 
     String correctAnswer1 = "c";
     String correctAnswer2 = "a";
-    String correctAnswer3 = "t";
+    String correctAnswer3 = "r";
+    String correctAnswer4 = "t";
 
     if (enteredAnswer1.equals(correctAnswer1) &&
             enteredAnswer2.equals(correctAnswer2) &&
-            enteredAnswer3.equals(correctAnswer3)) {
+            enteredAnswer3.equals(correctAnswer3) &&
+            enteredAnswer4.equals(correctAnswer4)) {
         // Stop the timer
         timer.stop();
         // Show a message indicating correct answer
-        String message = ("<html><div style='text-align: center; margin-left: 60px; margin-right: 60px;'><span style='font-family: Paytone One; font-size: 20px; color: #443C3C;'>CAT!</span><br><span style='font-size: 27px; color: #5E4580;'>Brilliant</span></div></html>");
+        String message = ("<html><div style='text-align: center; margin-left: 60px; margin-right: 60px;'><span style='font-family: Paytone One; font-size: 20px; color: #443C3C;'>CART!</span><br><span style='font-size: 27px; color: #5E4580;'>Brilliant</span></div></html>");
         // Create a custom option pane
         JOptionPane optionPane = new JOptionPane(message, JOptionPane.PLAIN_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
         // Set the button text to "NEXT"
@@ -204,6 +209,7 @@ private void checkAnswers(JFrame gameFrame) {
     answerField1.setText("");
     answerField2.setText("");
     answerField3.setText("");
+    answerField4.setText("");
     // Set focus to the first answer field
     answerField1.requestFocusInWindow();
 }
@@ -211,12 +217,12 @@ private void checkAnswers(JFrame gameFrame) {
     // Method to open the next level of the game
     private void openNextLevel() {
         currentLevel++;
-        new easyLevels3();
+        new hardLevels10();
     }
 
     // Method to restart the current level of the game
     private void restartLevel() {
-        new easyLevels2();
+        new hardLevels9();
     }
 
     @Override
@@ -227,7 +233,7 @@ private void checkAnswers(JFrame gameFrame) {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                new easyLevels2();
+                new hardLevels9();
             }
         });
     }
