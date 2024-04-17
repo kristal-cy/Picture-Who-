@@ -11,12 +11,11 @@ import javax.swing.text.DocumentFilter;
 import java.awt.*;
 import java.awt.event.*;
 
-public class easyLevels implements ActionListener {
+public class easyLevels8 implements ActionListener {
 
     // Text fields for user input
     private JTextField answerField1, answerField2, answerField3, answerField4;
-    // Current level tracker
-    private int currentLevel = 1;
+    private int currentLevel = 8;
     // Label to display remaining time 
     private JLabel timerLabel;
 // Timer for the game countdown and managing time-related events
@@ -33,14 +32,14 @@ public class easyLevels implements ActionListener {
     
     // Array of hint messages
     private String[] hintMessages = {
-        "D",
+        "B",
         "O" };
 
      // Index for cycling through hint messages
     private int hintMessageIndex = 0;
 
     // Constructor to initialize game 
-    public easyLevels() {
+    public easyLevels8() {
         openGameWindow(); // Initialize the game window 
     }
 
@@ -73,7 +72,7 @@ public class easyLevels implements ActionListener {
         
         // load and display image 
         //the setup PictureWho-main\\img\\
-        ImageIcon imageIcon1 = new ImageIcon("main\\img\\1.png");
+        ImageIcon imageIcon1 = new ImageIcon("main\\img\\8.png");
         Image image1 = imageIcon1.getImage().getScaledInstance(500,  550, Image.SCALE_SMOOTH);
         ImageIcon scaledImageIcon1 = new ImageIcon(image1);
         JLabel imageLabel1 = new JLabel(scaledImageIcon1);
@@ -201,17 +200,17 @@ public class easyLevels implements ActionListener {
         String enteredAnswer3 = answerField3.getText().trim().toLowerCase();
         String enteredAnswer4 = answerField4.getText().trim().toLowerCase();
     
-        String correctAnswer1 = "d";
+        String correctAnswer1 = "b";
         String correctAnswer2 = "o";
-        String correctAnswer3 = "g";
-        String correctAnswer4 = "s";
+        String correctAnswer3 = "o";
+        String correctAnswer4 = "k";
     
         if (enteredAnswer1.equals(correctAnswer1) &&
                 enteredAnswer2.equals(correctAnswer2) &&
                 enteredAnswer3.equals(correctAnswer3) &&
                 enteredAnswer4.equals(correctAnswer4)) {
             timer.stop();
-            String message = ("<html><div style='text-align: center; margin-left: 60px; margin-right: 60px;'><span style='font-family: Paytone One; font-size: 20px; color: #443C3C;'>DOGS!</span><br><span style='font-size: 27px; color: #5E4580;'>Brilliant</span></div></html>");
+            String message = ("<html><div style='text-align: center; margin-left: 60px; margin-right: 60px;'><span style='font-family: Paytone One; font-size: 20px; color: #443C3C;'>BOOK!</span><br><span style='font-size: 27px; color: #5E4580;'>Brilliant</span></div></html>");
 
             // Create a custom option pane
             JOptionPane optionPane = new JOptionPane(message, JOptionPane.PLAIN_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
@@ -241,12 +240,12 @@ public class easyLevels implements ActionListener {
     // Method to open the next level of the game
     private void openNextLevel() {
         currentLevel++;
-        new easyLevels2();
+        new easyLevels9();
     }
 
     // Method to restart the current level of the game
     private void restartLevel() {
-        new easyLevels();
+        new easyLevels8();
     }
 
     @Override
@@ -257,7 +256,7 @@ public class easyLevels implements ActionListener {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                new easyLevels();
+                new easyLevels8();
             }
         });
     }

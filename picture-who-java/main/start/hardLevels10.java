@@ -11,24 +11,24 @@ import javax.swing.text.DocumentFilter;
 import java.awt.*;
 import java.awt.event.*;
 
-public class easyLevels2 implements ActionListener {
-    private JTextField answerField1, answerField2, answerField3;
-    private int currentLevel = 2;
+public class hardLevels10 implements ActionListener {
+    private JTextField answerField1, answerField2, answerField3, answerField4, answerField5;
+    private int currentLevel = 30;
     private JLabel timerLabel;
     private Timer timer; 
-    private int secondsLeft = 20;
+    private int secondsLeft = 30;
 
     private JLabel hintImageLabel; 
     private int hintClickCount = 0;
 
     private String[] hintMessages = {
-        "C",
-        "A"
+        "S",
+        "U"
     };
 
     private int hintMessageIndex = 0;
     
-    public easyLevels2() {
+    public hardLevels10() {
         openGameWindow();
     }
 
@@ -57,7 +57,7 @@ public class easyLevels2 implements ActionListener {
         mainPanel.setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 20));
         mainPanel.add(imagePanel, BorderLayout.CENTER);
 
-        ImageIcon imageIcon1 = new ImageIcon("main\\img\\2.png");
+        ImageIcon imageIcon1 = new ImageIcon("main\\img\\30.png");
         Image image1 = imageIcon1.getImage().getScaledInstance(500,  550, Image.SCALE_SMOOTH);
         ImageIcon scaledImageIcon1 = new ImageIcon(image1);
         JLabel imageLabel1 = new JLabel(scaledImageIcon1);
@@ -65,16 +65,20 @@ public class easyLevels2 implements ActionListener {
 
         answerField1 = createSingleLetterTextField(gameFrame, answerField2);
         answerField2 = createSingleLetterTextField(gameFrame, answerField3);
-        answerField3 = createSingleLetterTextField(gameFrame, null);
+        answerField3 = createSingleLetterTextField(gameFrame, answerField4);
+        answerField4 = createSingleLetterTextField(gameFrame, answerField5);
+        answerField5 = createSingleLetterTextField(gameFrame, null);
 
         JPanel answerPanel = new JPanel(new GridLayout(1, 4, 20, 20));
         answerPanel.setBackground(new Color(94, 69, 128));
-        answerPanel.setBorder(BorderFactory.createEmptyBorder(20, 480, 10, 480));
+        answerPanel.setBorder(BorderFactory.createEmptyBorder(20, 450, 10, 450));
         mainPanel.add(answerPanel, BorderLayout.SOUTH);
 
         answerPanel.add(answerField1);
         answerPanel.add(answerField2);
         answerPanel.add(answerField3);
+        answerPanel.add(answerField4);
+        answerPanel.add(answerField5);
 
         Border timeBorder = BorderFactory.createEmptyBorder(0, 430, 0, 100); 
         timerLabel = new JLabel("Time Left: " + secondsLeft);
@@ -173,18 +177,30 @@ private void checkAnswers(JFrame gameFrame) {
     String enteredAnswer1 = answerField1.getText().trim().toLowerCase();
     String enteredAnswer2 = answerField2.getText().trim().toLowerCase();
     String enteredAnswer3 = answerField3.getText().trim().toLowerCase();
+    String enteredAnswer4 = answerField4.getText().trim().toLowerCase();
+    String enteredAnswer5 = answerField5.getText().trim().toLowerCase();
 
-    String correctAnswer1 = "c";
-    String correctAnswer2 = "a";
-    String correctAnswer3 = "t";
+    String correctAnswer1 = "s";
+    String correctAnswer2 = "u";
+    String correctAnswer3 = "s";
+    String correctAnswer4 = "h";
+    String correctAnswer5 = "i";
 
     if (enteredAnswer1.equals(correctAnswer1) &&
             enteredAnswer2.equals(correctAnswer2) &&
-            enteredAnswer3.equals(correctAnswer3)) {
+            enteredAnswer3.equals(correctAnswer3) &&
+            enteredAnswer4.equals(correctAnswer4) &&
+            enteredAnswer5.equals(correctAnswer5)) {
         // Stop the timer
         timer.stop();
         // Show a message indicating correct answer
-        String message = ("<html><div style='text-align: center; margin-left: 60px; margin-right: 60px;'><span style='font-family: Paytone One; font-size: 20px; color: #443C3C;'>CAT!</span><br><span style='font-size: 27px; color: #5E4580;'>Brilliant</span></div></html>");
+        String message = ("<html><div style='text-align: center; margin-left: 60px; margin-right: 60px;'>" +
+        "<span style='font-family: Paytone One; font-size: 20px; color: #443C3C;'>SUSHI!</span><br>" +
+        "<span style='font-size: 27px; color: #5E4580;'>Brilliant</span></div><br><br>" +
+        "<div style='font-family: Paytone One; font-size: 12px; margin-left: 60px; margin-right: 60px; text-align: center;'>" +
+        "Congratulations! You've completed all the hard levels!<br>" +
+        "You're a champ! Ready for the next challenge? Click 'Next' to choose your difficulty level and embark on your next adventure.<br>" +
+        "You can always come back to the hard mode, easy mode, or moderate mode. Keep the fun going!</div></html>");
         // Create a custom option pane
         JOptionPane optionPane = new JOptionPane(message, JOptionPane.PLAIN_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
         // Set the button text to "NEXT"
@@ -204,19 +220,98 @@ private void checkAnswers(JFrame gameFrame) {
     answerField1.setText("");
     answerField2.setText("");
     answerField3.setText("");
+    answerField4.setText("");
+    answerField5.setText("");
     // Set focus to the first answer field
     answerField1.requestFocusInWindow();
 }
     
+private void openDifficultyWindow() {
+
+    // first, we create the new window (JFrame)
+    JFrame difficultyFrame = new JFrame("Select Difficulty");
+
+    // its sized and designed appropriately 
+    difficultyFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    difficultyFrame.setSize(1920, 1200);
+    difficultyFrame.setResizable(false);
+    
+    // a panel is created to hold the difficulty level buttons
+    JPanel difficultyPanel = new JPanel(new GridLayout(1, 0));
+    difficultyPanel.setBorder(BorderFactory.createEmptyBorder(20, 10, 20, 10));
+
+    
+       // Here we start creating the buttons for different difficulty levels ("Easy", "Moderate", "Hard")
+    // Buttons for different difficulty levels
+    JButton easyButton = new JButton("Easy");
+    easyButton.setFont(new Font("segoe ui black", Font.BOLD, 35));
+    easyButton.setForeground(Color.decode("#5E4580"));
+    easyButton.setBackground(Color.WHITE);
+
+    JButton moderateButton = new JButton("Moderate");
+    moderateButton.setFont(new Font("segoe ui black", Font.BOLD, 35));
+    moderateButton.setForeground(Color.decode("#5E4580"));
+    moderateButton.setBackground(Color.WHITE);
+
+    JButton hardButton = new JButton("Hard");
+    hardButton.setFont(new Font("segoe ui black", Font.BOLD, 35));
+    hardButton.setForeground(Color.decode("#5E4580"));
+    hardButton.setBackground(Color.WHITE);
+
+
+    // Each button is assigned an ActionListener - this is the code that runs when the button is clicked.
+    easyButton.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            // Dispose the current window
+            difficultyFrame.dispose();
+            // Open the Easy level
+            new easyLevels();
+        }
+    });
+    
+    moderateButton.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            // Dispose the current window
+            difficultyFrame.dispose();
+            // Open the Moderate level
+            new moderateLevels();
+        }
+    });
+    
+    hardButton.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            // Dispose the current window
+            difficultyFrame.dispose();
+            // Open the Hard level
+            new hardLevels();
+        }
+    });
+    
+    // Now we're adding all the buttons to the panel
+    difficultyPanel.add(easyButton);
+    difficultyPanel.add(moderateButton);
+    difficultyPanel.add(hardButton);
+
+    // The panel is then added to the new window (JFrame)
+    difficultyFrame.add(difficultyPanel);
+
+       // The JFrame position is set and finally, we make it visible to the user.
+    difficultyFrame.setLocationRelativeTo(null);
+    difficultyFrame.setVisible(true);
+}
+
+
     // Method to open the next level of the game
-    private void openNextLevel() {
-        currentLevel++;
-        new easyLevels3();
-    }
+// Method to open the next level of the game
+private void openNextLevel() {
+    currentLevel++;
+    openDifficultyWindow(); // Open the difficulty selection window
+}    
+
 
     // Method to restart the current level of the game
     private void restartLevel() {
-        new easyLevels2();
+        new hardLevels10();
     }
 
     @Override
@@ -227,7 +322,7 @@ private void checkAnswers(JFrame gameFrame) {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                new easyLevels2();
+                new hardLevels10();
             }
         });
     }
